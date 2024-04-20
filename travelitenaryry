@@ -1,0 +1,76 @@
+package codealphaa;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Destination {
+    private String name;
+    private String date;
+
+    public Destination(String name, String date) {
+        this.name = name;
+        this.date = date;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDate() {
+        return date;
+    }
+}
+
+public class TravelItineraryPlanner {
+    private static List<Destination> destinations = new ArrayList<>();
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Travel Itinerary Planner");
+            System.out.println("1. Add Destination");
+            System.out.println("2. View Itinerary");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    addDestination(scanner);
+                    break;
+                case 2:
+                    viewItinerary();
+                    break;
+                case 3:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option.");
+            }
+        }
+    }
+
+    private static void addDestination(Scanner scanner) {
+        System.out.print("Enter destination name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter date of visit (e.g., May 15): ");
+        String date = scanner.nextLine();
+        destinations.add(new Destination(name, date));
+        System.out.println("Destination added successfully!");
+    }
+
+    private static void viewItinerary() {
+        if (destinations.isEmpty()) {
+            System.out.println("No destinations added yet.");
+        } else {
+            System.out.println("Your Travel Itinerary:");
+            for (int i = 0; i < destinations.size(); i++) {
+                Destination destination = destinations.get(i);
+                System.out.println((i + 1) + ". " + destination.getName() + " - " + destination.getDate());
+            }
+        }
+    }
+}
